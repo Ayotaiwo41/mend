@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <div class="logo">
+            <span class="logo-mark">M</span>
+            <span class="logo-text">Mend</span>
+        </div>
+        <p class="tagline">Tell us what you love. We'll find what's next.</p>
+    </div>
+</header>
+
+<main class="main">
+
+    <!-- ── SEARCH INPUT ── -->
+    <section id="inputSection" class="card">
+        <label class="input-label" for="showInput">Add a show, movie, or anime you've watched</label>
+        <div class="input-row" style="position:relative;">
+            <input type="text" id="showInput" class="text-input"
+                   placeholder="e.g. Inception, Attack on Titan, The Bear..."
+                   autocomplete="off"/>
+            <button class="btn-primary" onclick="addShow()">
+                Add <span class="btn-plus">+</span>
+            </button>
+            <div id="suggestionsBox" class="suggestions-box" style="display:none;"></div>
+        </div>
+        <p class="hint">Press Enter or click Add · Results come from TMDB</p>
+    </section>
+
+    <!-- ── WATCHLIST TAGS ── -->
+    <section id="watchlistSection" style="display:none;">
+        <h2 class="section-heading">Your Watchlist</h2>
+        <div id="tagContainer" class="tag-row"></div>
+        <button class="btn-outline" onclick="getRecommendations()">
+            Get Recommendations <span class="arrow">→</span>
+        </button>
+    </section>
+
+    <!-- ── LOADING ── -->
+    <section id="loadingSection" class="loading-wrap" style="display:none;">
+        <div class="spinner"></div>
+        <div class="spinner spinner-2"></div>
+        <p id="loadingText" class="loading-text">Scanning the universe for your next obsession...</p>
+    </section>
+
+    <!-- ── RECOMMENDATIONS ── -->
+    <section id="recsSection" style="display:none;">
+        <h2 class="section-heading">Recommended For You</h2>
+        <p id="recsSubtitle" class="section-sub"></p>
+        <div id="recsGrid" class="recs-grid"></div>
+        <button class="btn-ghost" onclick="getRecommendations()">↺ Refresh</button>
+    </section>
+
+    <div id="errorToast" class="error-toast" style="display:none;"></div>
+
+</main>
+
+<footer class="site-footer">
+    <p>Powered by TMDB · Built with Spring Boot + Thymeleaf</p>
+</footer>
+
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>
